@@ -22,7 +22,7 @@ class ProjectController extends Controller
         'slug' => 'unique',
         'type_id' => 'required|exists:types,id',
         'difficulty_id' => 'required|exists:difficulties,id',
-        'technology' => 'array|exists:technologys,id'
+        'technologies' => 'array|exists:technologies,id|nullable'
     ];
 
     protected $messages = [
@@ -90,6 +90,7 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->fill($data);
         $newProject->save();
+        $newProject->technologies()->sync($data['technologies'] ?? []);
 
         return redirect()->route('admin.projects.show', $newProject->slug)->with('info-message', "'$newProject->name' was created successfully!")->with('alert', 'success');
     }
@@ -138,6 +139,7 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
+        $project->technologies()->sync($data['technologies'] ?? []);
 
         return redirect()->route('admin.projects.show', compact('project'))->with('info-message', "'$project->name' was updated successfully!")->with('alert', 'success');
     }
@@ -169,6 +171,7 @@ class ProjectController extends Controller
             Storage::delete($project->preview);
         }
 
+        $project->technologies()->sync([]);
         $project->forceDelete();
         return redirect()->route('admin.trash')->with('info-message', "'$project->name' is permanently deleted!")->with('alert', 'danger');
     }
