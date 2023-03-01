@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Difficulty;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -20,7 +21,8 @@ class ProjectController extends Controller
         'github_url' => 'required|url|min:10',
         'slug' => 'unique',
         'type_id' => 'required|exists:types,id',
-        'difficulty_id' => 'required|exists:difficulties,id'
+        'difficulty_id' => 'required|exists:difficulties,id',
+        'technology' => 'array|exists:technologys,id'
     ];
 
     protected $messages = [
@@ -68,7 +70,7 @@ class ProjectController extends Controller
     public function create(Project $project)
     {
 
-        return view('admin.projects.create', compact('project'), ['types' => Type::all(), 'difficulties' => Difficulty::all()]);
+        return view('admin.projects.create', compact('project'), ['types' => Type::all(), 'difficulties' => Difficulty::all(), 'technologies' => Technology::all()]);
     }
 
     /**
@@ -111,7 +113,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'), ['types' => Type::all(), 'difficulties' => Difficulty::all()]);
+        return view('admin.projects.edit', compact('project'), ['types' => Type::all(), 'difficulties' => Difficulty::all(),  'technologies' => Technology::all()]);
     }
 
     /**

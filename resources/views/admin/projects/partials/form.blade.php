@@ -54,6 +54,14 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            @foreach ($technologies as $technology)
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="technologyCheck" value="{{$technology->id}}" name="tecnhology[]">
+                <label class="form-check-label" for="technologyCheck">{{$technology->name}}</label>
+            </div>
+            @endforeach
+        </div>
     </div>
     <div class="row my-3">
         {{-- Publication Date --}}

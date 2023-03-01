@@ -39,6 +39,7 @@
                   <th scope="col">Publication Date <a href="{{route('admin.projects.index', 'sort=publication_date')}}" class="text-white d-inline-block"><i class="fa-solid fa-sort-down"></i></a></th>
                   <th scope="col">Difficulty <a href="{{route('admin.projects.index', 'sort=difficulty_id')}}" class="text-white d-inline-block"><i class="fa-solid fa-sort-down"></i></a></th>
                   <th scope="col">Type <a href="{{route('admin.projects.index', 'sort=type_id')}}" class="text-white d-inline-block"><i class="fa-solid fa-sort-down"></i></a></th>
+                  <th scope="col">Technologies</th>
                   <th scope="col" class="text-center">Actions</th>
                 </tr>
               </thead>
@@ -60,6 +61,13 @@
                     <span class="badge rounded-pill bg-secondary">Empty</span>
                     @endif
                   </td>
+                  <td>
+                    @forelse ($project->technologies as $technology)
+                        <span class="badge rounded-pill {{ $technology->name == 'JavaScript' ? 'text-dark' : '' }}" style="background-color: {{$technology->color}}">{{ $technology->name }}</span>
+                    @empty
+                    <span class="badge rounded-pill bg-secondary">No Technologies</span>
+                    @endforelse
+                </td>
                   <td class="text-center">
                     <a href="{{route('admin.projects.show', $project->slug)}}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-eye"></i></a>
                     <a href="{{route('admin.projects.edit', $project->slug)}}" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-edit"></i></a>
