@@ -1,0 +1,38 @@
+@import '~bootstrap/scss/bootstrap';
+@import "@fortawesome/fontawesome-free/css/all.css";
+@import '@sweetalert2/theme-dark/dark.scss';
+
+
+ul.pagination {
+    margin: 0;
+    justify-content: center;
+
+
+    .active .page-link {
+        background: black !important;
+        color: white !important;
+    }
+
+    .page-link {
+        color: black !important;
+        border: 1px solid lightgrey !important;
+    }
+}
+
+
+
+//Types
+
+div.rounded-circle {
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+}
+
+div.color-index {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin: auto;
+    vertical-align: text-bottom;
+}
