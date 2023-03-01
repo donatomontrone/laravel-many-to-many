@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::delete('/{project}/force-delete', [AdminProjectController::class, 'forceDelete'])->name('force-delete');
     Route::post('/restore-all', [AdminProjectController::class, 'restoreAll'])->name('restore-all');
     Route::resource('/types', TypeController::class);
+    Route::delete('/projects/{project}/delete-type', [AdminProjectsController::class, 'deleteType'])->name('projects.deleteType');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

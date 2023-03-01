@@ -53,7 +53,13 @@
                       <div class="progress-bar progress-bar-striped @if ($project->difficulty->percentage === '60%' || $project->difficulty->percentage === '80%') bg-warning  @elseif  ($project->difficulty->percentage === '100%') bg-danger  @else bg-success  @endif" style="width: {{$project->difficulty->percentage}}"></div>
                     </div>
                   </td>
-                  <td>{{$project->type->name}}</td>
+                  <td>
+                    @if ($project->type)
+                    <span class="badge rounded-pill" style="background-color: {{$project->type->color}};">{{$project->type->name}}</span>
+                    @else
+                    <span class="badge rounded-pill bg-secondary">Empty</span>
+                    @endif
+                  </td>
                   <td class="text-center">
                     <a href="{{route('admin.projects.show', $project->slug)}}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-eye"></i></a>
                     <a href="{{route('admin.projects.edit', $project->slug)}}" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-edit"></i></a>

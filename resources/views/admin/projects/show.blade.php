@@ -18,7 +18,11 @@
             <div class="card text-center">
                 <div class="card-header d-flex justify-content-between">
                     <p class="d-inline m-0">
-                        <span class="badge rounded-pill" style="background-color: {{$project->type->color}}">{{$project->type->name}}</span>
+                        @if ($project->type)
+                        <span class="badge rounded-pill" style="background-color: {{$project->type->color}};">{{$project->type->name}}</span>
+                        @else
+                        <span class="badge rounded-pill bg-secondary">Empty</span>
+                        @endif
                     </p>
                     <p class="d-inline-block m-0">
                         @for ($i = 0; $i < 5; $i++)

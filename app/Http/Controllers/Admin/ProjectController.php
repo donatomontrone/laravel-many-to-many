@@ -189,4 +189,18 @@ class ProjectController extends Controller
         Project::onlyTrashed()->restore();
         return redirect()->route('admin.trash')->with('info-message', "All projects have been restored!")->with('alert', 'success');
     }
+
+    /**
+     * Remove the specified category from project.
+     *
+     * @param  Project $project
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteType(Project $project)
+    {
+        $type = $project->type;
+        $type->type_id = null;
+        $type->update();
+        return redirect()->route('admin.types.show', compact('type'));
+    }
 }

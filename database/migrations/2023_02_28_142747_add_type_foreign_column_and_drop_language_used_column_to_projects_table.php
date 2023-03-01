@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             $table->dropColumn('language_used');
-            $table->unsignedBigInteger('type_id')->after('id');
-            $table->foreign('type_id')->references('id')->on('types');
+            $table->unsignedBigInteger('type_id')->nullable()->after('id');
+            $table->foreign('type_id')->references('id')->on('types')->onUpdate('cascade')->onDelete('set null');
         });
     }
 
